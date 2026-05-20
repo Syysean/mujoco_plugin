@@ -21,7 +21,7 @@ AAMjManager (每个关卡一个单例协调器)
   |-- AMjArticulation (robot / mechanism, possessable Pawn)
   |     |-- UMjBody -> UMjHingeJoint, UMjGeom, UMjSensor, ...
   |     |-- UMjActuator (position, velocity, motor, muscle, ...)
-  |     '-- UMjKeyframe, UMjDefault, UMjEquality, UMjTendon
+  |     |-- UMjKeyframe, UMjDefault, UMjEquality, UMjTendon
   |
   |-- UMjQuickConvertComponent (在任何静态网格(Static Mesh)参与者上)
   |-- AMjHeightfieldActor (UE 地形 -> MuJoCo 高度场)

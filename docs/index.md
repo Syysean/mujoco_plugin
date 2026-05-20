@@ -9,6 +9,7 @@ title: 主页
     * [插件指南](#guide)
     * [肌肉骨骼人](#ms)
     * [人形机器人](#humanoid)
+    * [其他机器人](#other)
 * [__引擎插件开发__](#dev)
 
 ---
@@ -46,7 +47,7 @@ https://github.com/donghaiwang/UnrealRoboticsLab/commit/51cce72a014a42612125ea6b
 | [ZMQ 网络与 ROS 2](guides/zmq_networking.md) | ZMQ 传输、主题、摄像头流媒体 |
 | [URLab 桥接](guides/policy_bridge.md) | Python 中间件、强化学习策略、远程控制 |
 | [架构](architecture.md) | 子系统设计、线程模型、编译流程 |
-| [UE4](./dev/ue4.md) | 迁移到UE4 |
+| [UE4 实现](./dev/ue4.md) | 迁移到UE4 |
 
 ---
 
@@ -62,6 +63,13 @@ https://github.com/donghaiwang/UnrealRoboticsLab/commit/51cce72a014a42612125ea6b
 | 指南 | 涵盖的内容 |
 |-------|---------------|
 | [人形机器人模型](./humanoid/g1.md) | 人形机器人参考模型 |
+
+## 其他机器人 <span id="other"></span>
+
+| 指南 | 涵盖的内容 |
+|-------|---------------|
+| [机器狗](./go2.md) | 仿生四足机器人 Go2 |
+| [水下机器人](./underwater/README.md) | 高保真的水下机器人插件 |
 
 ---
 

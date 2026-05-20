@@ -1,5 +1,13 @@
 # 迁移到UE4
 
+1.将xml文件转成 _ue.xml 文件
+
+2.通过内容浏览器导入虚幻编辑器，并生成蓝图 -> 通过拖拽 Actor 的方式（参考 [mujoco_plugin](https://github.com/OpenHUTB/hutb/commit/2cc693c1248f3f65d71a5d95c23231f9dfa928a1) ）
+
+-> Source/URLab/Public/MuJoCo/Core/AMjManager.h 是一个参与者，通过它进行xml文件的加载
+
+3.在场景中指定位置将蓝图实例化
+
 
 ## 问题
 
