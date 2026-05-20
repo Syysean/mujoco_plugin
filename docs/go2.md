@@ -2,7 +2,7 @@
 
 ## 1. 机器人模型 (MJCF XML)
 
-The Go2 robot model comes from MuJoCo Menagerie (not walk-these-ways):
+来自 [MuJoCo Menagerie](https://github.com/google-deepmind/mujoco_menageri) 的 Go2 机器人 (不是 walk-these-ways):
 
 ```bash
 git clone https://github.com/google-deepmind/mujoco_menagerie.git
@@ -14,7 +14,7 @@ git clone https://github.com/google-deepmind/mujoco_menagerie.git
 在该目录下放置这些文件：
 
 - `body_latest.jit` — 主策略网络
-- `adaptation_module_latest.jit` — Observation history adaptation module
+- `adaptation_module_latest.jit` — 观测历史适应模块
 
 ```bash
 git clone https://github.com/Teddy-Liao/walk-these-ways-go2.git
@@ -34,6 +34,6 @@ python src/run.py --policy go2_wtw --prefix go2
 
 ## 资源
 
-- Robot XML: https://github.com/google-deepmind/mujoco_menagerie/tree/main/unitree_go2
-- Policy: https://github.com/Teddy-Liao/walk-these-ways-go2
-- Original paper: https://github.com/Improbable-AI/walk-these-ways (MIT License)
+- 机器人 XML: https://github.com/google-deepmind/mujoco_menagerie/tree/main/unitree_go2
+- 策略: https://github.com/Teddy-Liao/walk-these-ways-go2
+- 原始论文: https://github.com/Improbable-AI/walk-these-ways (MIT 许可证)
