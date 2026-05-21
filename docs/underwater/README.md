@@ -10,7 +10,7 @@
 
 MuJoCo 承担水下机器人的物理仿真核心，包括流体受力、浮力、碰撞检测和推进器动力学。
 
-### 为什么选择 MuJoCo
+### 流体动力学机制
 
 MuJoCo 提供两种内置的现象学流体模型，无需求解流场状态（无状态模型），计算开销远低于 CFD，可实时运行：
 
@@ -32,32 +32,7 @@ buoyancy_force = fluid_density * gravity * body_volume
 data.xfrc_applied[body_id, 2] = buoyancy_force  # Z 轴向上
 ```
 
-这是水下仿真与空气仿真（果蝇飞行）的关键区别。
-
-### 基础 XML 配置
-
-```xml
-<mujoco>
-  <!-- 设置水的物理参数 -->
-  <option gravity="0 0 -9.81"
-          density="1000"
-          viscosity="0.00089"
-          integrator="implicitfast"/>
-
-  <worldbody>
-    <body name="rov" pos="0 0 -1.0">
-      <freejoint/>
-      <!-- 用圆柱体替代 ROV 本体 -->
-      <geom type="cylinder" size="0.15 0.30"
-            mass="10"
-            fluidshape="ellipsoid"
-            fluidcoef="0.40 7.79 2.81 3.84 0.27"/>
-    </body>
-  </worldbody>
-</mujoco>
-```
-
-> **积分器说明**：官方文档推荐在存在速度相关力（如流体阻力）时使用 `implicitfast` 积分器，可显著提高仿真稳定性。
+这是水下仿真与空气仿真（如果蝇飞行）的关键区别。
 
 ---
 
@@ -82,14 +57,11 @@ data.xfrc_applied[body_id, 2] = buoyancy_force  # Z 轴向上
 5 个流体系数来自 ETH Zurich 对水下游泳机器人的实验标定（arxiv 2602.23283）：
 
 ```
-fluidcoef = [0.40,      钝体阻力
-             7.79,      细长体阻力
-             2.81,      角阻力
-             3.84,      库塔升力
-             0.27       马格努斯升力
-             ]      
-                  
-                     
+fluidcoef = [0.40,   # 钝体阻力
+             7.79,   # 细长体阻力
+             2.81,   # 角阻力
+             3.84,   # 库塔升力
+             0.27]   # 马格努斯升力
 ```
 
 ---
@@ -105,6 +77,10 @@ fluidcoef = [0.40,      钝体阻力
 | 无流体（真空） | -117.8 m | -48.07 m/s | 自由落体 |
 | 水中（仅阻力） | -2.0 m | -0.41 m/s | 阻尼下沉 |
 | 水中（阻力+浮力） | **+3.6 m** | +0.74 m/s | **上浮** |
+
+**仿真数据量化曲线：**
+
+![水下动力学多场景量化对比曲线](../img/underwater_test_results.png)
 
 ### 物理公式验证
 
@@ -127,33 +103,34 @@ $$a_{net} = \frac{F_{buoy} - mg}{m} = \frac{1000 \times 9.81 \times 0.0424 - 10 
 3. ✓ 圆柱体在水中行为符合物理预期
 4. ✓ 仿真运行速度远超实时，支持后续强化学习训练
 
-### 示例代码
+---
 
-完整示例代码见：[underwater_demo.py](https://github.com/OpenHUTB/mujoco_plugin/docs/underwater/underwater_demo.py)
+## 运行与配置
 
-```python
-import mujoco
-import numpy as np
+本模块采用代码与数据解耦的设计，核心结构如下：
 
-WATER_DENSITY   = 1000.0    # kg/m³
-WATER_VISCOSITY = 0.00089   # Pa·s
-GRAVITY         = 9.81
-
-# 加载模型
-model = mujoco.MjModel.from_xml_path("rov.xml")
-data  = mujoco.MjData(model)
-body_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, "rov")
-
-# 预计算浮力
-body_volume    = 0.0424          # m³（圆柱体体积）
-buoyancy_force = WATER_DENSITY * GRAVITY * body_volume  # 415.8 N
-
-# 仿真循环
-while data.time < 10.0:
-    # 每步施加浮力
-    data.xfrc_applied[body_id, 2] = buoyancy_force
-    mujoco.mj_step(model, data)
+```text
+mujoco_plugin/
+├── config.json                     # 全局参数配置文件
+├── rov_base.xml                    # MuJoCo MJCF 模型文件
+├── docs/
+│   └── img/
+│       └── underwater_test_results.png   # 自动生成的量化曲线图
+└── src/
+    └── underwater/
+        └── underwater_sim.py       # 仿真主程序
 ```
+
+**调整参数**：编辑 `config.json`，修改水体密度、ROV 质量或测试场景，无需改动 Python 源码。
+
+**运行仿真**：在项目根目录下执行：
+
+```shell
+pip install mujoco matplotlib numpy
+python src/underwater/underwater_sim.py
+```
+
+运行结束后自动生成量化折线图，并可选择启动 MuJoCo 交互式 3D 查看器。
 
 ---
 
@@ -163,5 +140,3 @@ while data.time < 10.0:
 - [Simple Models, Real Swimming: Digital Twins for Tendon-Driven Underwater Robots](https://arxiv.org/html/2602.23283v1)（ETH Zurich, 2025）
 - [UNav-Sim 水下仿真参考](https://github.com/open-airlab/UNav-Sim)
 - [OpenHUTB/locomotion flybody](https://github.com/OpenHUTB/locomotion/tree/master/flybody)（果蝇飞行流体模型）
-
-
