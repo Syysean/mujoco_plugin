@@ -1,0 +1,34 @@
+{
+  "fluid_density": 1000.0,
+  "fluid_viscosity": 0.00089,
+  "gravity": 9.81,
+  "simulation_timestep": 0.002,
+  "duration_seconds": 5.0,
+  "rov_body": {
+    "geom_name": "rov_body",
+    "mass": 10.0,
+    "radius": 0.15,
+    "half_length": 0.30,
+    "fluid_coef": [0.40, 7.79, 2.81, 3.84, 0.27]
+  },
+  "test_scenarios": {
+    "scenario_1": {
+      "density": 0.0,
+      "viscosity": 0.0,
+      "apply_buoyancy": false,
+      "label": "1. 无流体环境（纯重力下沉）"
+    },
+    "scenario_2": {
+      "density": 1000.0,
+      "viscosity": 0.00089,
+      "apply_buoyancy": false,
+      "label": "2. 水中环境（仅计算阻力，无浮力）"
+    },
+    "scenario_3": {
+      "density": 1000.0,
+      "viscosity": 0.00089,
+      "apply_buoyancy": true,
+      "label": "3. 水中环境（阻力 + 手动浮力补偿）"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<mujoco model="underwater_rov_base">
+  <compiler inertiafromgeom="true"/>
+  <option integrator="implicitfast"/>
+  <worldbody>
+    <body name="rov" pos="0 0 -1.0">
+      <freejoint/>
+      <geom name="rov_body"
+            type="cylinder"
+            size="0.15 0.30"
+            mass="10.0"
+            rgba="0.8 0.4 0.1 1"
+            fluidshape="ellipsoid"/>
+    </body>
+  </worldbody>
+  <sensor>
+    <framepos    name="pos" objtype="body" objname="rov"/>
+    <framelinvel name="vel" objtype="body" objname="rov"/>
+  </sensor>
+</mujoco>
