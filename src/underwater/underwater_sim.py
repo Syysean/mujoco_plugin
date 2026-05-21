@@ -19,8 +19,8 @@ plt.rcParams['axes.unicode_minus'] = False
 
 # ── 路径锚定：相对脚本位置定位资源文件 ────────────────────
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_DEFAULT_CONFIG = os.path.join(_HERE, "../../config.json")
-_DEFAULT_MODEL  = os.path.join(_HERE, "../../rov_base.xml")
+_DEFAULT_CONFIG = os.path.join(_HERE, "data/config.json")
+_DEFAULT_MODEL  = os.path.join(_HERE, "data/rov_base.xml")
 
 
 class UnderwaterSimulation:
