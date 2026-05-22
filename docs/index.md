@@ -38,6 +38,7 @@ https://github.com/donghaiwang/UnrealRoboticsLab/commit/51cce72a014a42612125ea6b
 | [入门](getting_started.md) | 安装、首次模拟、控制方法 |
 | [特性](features.md) | 完整特性参考 |
 | [MJCF 导入](guides/mujoco_import.md) | 将 MuJoCo XML 模型导入虚幻引擎 |
+| [URLab 编辑器](./dev/URLabEditor.md) | URLab 的编辑器模块 |
 | [几何体与碰撞](guides/geometry_authoring.md) | 图元、网格几何体、快速转换、高度场 |
 | [控制器框架](guides/controller_framework.md) | PD、关键帧和自定义控制器 |
 | [调试可视化](guides/debug_visualization.md) | 快捷键驱动的叠加层：接触点、关节、岛状结构、分割、肌肉 |
@@ -47,7 +48,7 @@ https://github.com/donghaiwang/UnrealRoboticsLab/commit/51cce72a014a42612125ea6b
 | [ZMQ 网络与 ROS 2](guides/zmq_networking.md) | ZMQ 传输、主题、摄像头流媒体 |
 | [URLab 桥接](guides/policy_bridge.md) | Python 中间件、强化学习策略、远程控制 |
 | [架构](architecture.md) | 子系统设计、线程模型、编译流程 |
-| [UE4 实现](./dev/ue4.md) | 迁移到UE4 |
+| [UE4 实现](./dev/ue4.md) | 迁移到 UE4，[适配 hutb 模拟器](https://github.com/OpenHUTB/hutb) |
 
 ---
 
