@@ -32,6 +32,10 @@ Unreal Robotics Lab 可以导入标准的 MuJoCo XML (MJCF) 文件，并将完�
 # conda activate nn_3.11
 pip install trimesh numpy
 ```
+Python 3.7 安装过程
+```shell
+pip install trimesh numpy scipy
+```
 
 使用：
 ```shell

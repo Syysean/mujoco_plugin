@@ -8,8 +8,24 @@
 
 3.在场景中指定位置将蓝图实例化
 
+hutb 引擎中默认使用的是 Python 3.7.7，位于 [Engine/Binaries/ThirdParty/Python3/Win64](https://github.com/OpenHUTB/engine/tree/hutb/Engine/Binaries/ThirdParty/Python3/Win64) 、UE 5.7 中默认使用的是 Python 3.11.8。
+
 
 ## 问题
+
+* 虚幻中验证pip报错：
+```text
+FPlatformProcess::ExecProcess(*PythonPath, TEXT("-m pip --version"), &PipCheck, &PipOut, &PipErr);
+
+  File "D:\hutb\Build\engine\Engine\Binaries\ThirdParty\Python3\Win64\lib\site-packages\pip\_internal\vcs\subversion.py", line 180, in __init__
+    use_interactive = sys.stdin.isatty()
+AttributeError: 'NoneType' object has no attribute 'isatty'
+```
+**手动执行包的安装**：
+```shell
+python -m pip install trimesh numpy scipy
+```
+就可以生成_ue.xml文件和meshes/*glb文件。
 
 * 打包报错：`UnrealBuildTool: ERROR: Non-editor build cannot depend on non-redistributable modules.`
 
